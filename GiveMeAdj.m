@@ -1,7 +1,18 @@
 function [theAdjMat,regionAcronyms,adjPVals] = GiveMeAdj(whatData,pThreshold,doBinarize,...
                                     whatWeightMeasure,whatHemispheres)
-% Gives a string identifying the type of normalization to apply, then returns
-% the gene data for that normalization.
+% GiveMeAdj Mouse connectome as an adjacency matrix
+%
+% INPUTS:
+% - whatData: 'Oh' or 'Ypma'
+% - pTheshold: threshold for binarization for the case of a binary adjacency matrix for Oh et al.
+% - doBinarize: whether to binarize non-zero weights to 1 (boolean)
+% - whatWeightMeasure: (only used for 'Oh') how to construct interareal weights
+% - whatHemispheres: (only used for 'Oh'): 'right' or 'left'
+%
+% OUTPUTS:
+% - theAdjMat: an adjacency matrix
+% - regionAcronyms: labels for each row/column in the adjacency matrix
+% - adjPVals: p-values for each edge (in the case of 'Oh')
 % ------------------------------------------------------------------------------
 
 %-------------------------------------------------------------------------------
@@ -90,15 +101,16 @@ case 'Oh'
 
 case 'Ypma'
     [W_rect,sourceRegions,targetRegions] = ImportCorticalConnectivityWeights();
-    [W,regionNames] = MakeCompleteConnectome(W_rect,sourceRegions,targetRegions);
-    [structInfo,ia] = MatchRegionsOh([],regionNames);
-    W = W(ia,ia);
+    [W,regionAcronyms] = MakeCompleteConnectome(W_rect,sourceRegions,targetRegions);
+    % Match to Oh et al. regions:
+    % [~,ia] = MatchRegionsOh([],regionNames);
+    % W = W(ia,ia);
     theAdjMat = W;
     adjPVals = [];
 end
 
 %-------------------------------------------------------------------------------
-% Binarize
+% Binarize:
 if doBinarize
     theAdjMat = theAdjMat;
     theAdjMat(theAdjMat > 0) = 1;

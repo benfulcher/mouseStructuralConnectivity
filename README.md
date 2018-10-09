@@ -15,3 +15,13 @@ whatHemispheres = 'right';
 [Adj,regionAcronyms,adjPVals] = GiveMeAdj(whatData,pThreshold,doBinarize,...
                                     whatWeightMeasure,whatHemispheres);
 ```
+
+
+**Construct weighted Ypma connectome**
+
+```
+whatData = 'Ypma';
+doBinarize = false;
+
+[Adj,regionAcronyms,adjPVals] = GiveMeAdj(whatData,[],doBinarize);
+```
