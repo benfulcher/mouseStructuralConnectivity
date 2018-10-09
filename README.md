@@ -3,7 +3,7 @@ Code for estimating interareal axonal connectivity in mouse
 
 Example usage:
 
-**Add path to Data***:
+**Add path to Data**:
 ```matlab
 startup
 ```
