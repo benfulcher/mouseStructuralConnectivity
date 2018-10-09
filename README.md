@@ -3,9 +3,14 @@ Code for estimating interareal axonal connectivity in mouse
 
 Example usage:
 
-**Get normalized connection density estimates for the right hemisphere with data taken from the statistical model of Oh et al.**
-
+**Add path to Data***:
+```matlab
+startup
 ```
+
+**Get normalized connection density estimates for the right hemisphere with data taken from the statistical model of Oh et al.**:
+
+```matlab
 whatData = 'Oh';
 doBinarize = false;
 pThreshold = 0.05;
@@ -19,9 +24,9 @@ whatHemispheres = 'right';
 
 **Construct weighted Ypma connectome**
 
-```
+```matlab
 whatData = 'Ypma';
 doBinarize = false;
 
-[Adj,regionAcronyms,adjPVals] = GiveMeAdj(whatData,[],doBinarize);
+[Adj,regionAcronyms] = GiveMeAdj(whatData,[],doBinarize);
 ```
